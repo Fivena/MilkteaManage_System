@@ -8,7 +8,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>22</maven.compiler.release>
-        <exec.mainClass>com.appsystem.milkteamanage_system.MilkteaManage_system</exec.mainClass>
+        <exec.mainClass>com.appsystem.milkteamanage_system.Login</exec.mainClass>
     </properties>
     <dependencies>
     <dependency>
