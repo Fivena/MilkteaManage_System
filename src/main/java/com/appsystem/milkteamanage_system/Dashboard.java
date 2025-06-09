@@ -1,0 +1,239 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package com.appsystem.milkteamanage_system;
+
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author Admin
+ */
+public class Dashboard extends javax.swing.JFrame {
+
+    /**
+     * Creates new form dashboard
+     */
+    public Dashboard() {
+        setTitle("Bubble Tea Management System");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(900, 700);
+        setLocationRelativeTo(null);
+
+        // Main panel with a light gradient background
+        JPanel mainPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                GradientPaint gp = new GradientPaint(0, 0, new Color(240, 248, 255), 0, getHeight(), new Color(200, 220, 255));
+                g2d.setPaint(gp);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // Search bar panel
+        JPanel searchPanel = new JPanel(new BorderLayout());
+        searchPanel.setOpaque(false);
+        searchPanel.setBorder(new EmptyBorder(30, 40, 20, 40));
+
+        JPanel searchBox = new JPanel(new BorderLayout(5, 0));
+        searchBox.setBorder(new LineBorder(new Color(70, 130, 180), 2, true));
+        searchBox.setBackground(Color.WHITE);
+        JLabel searchIcon = new JLabel(new ImageIcon("search-icon.png")); // Placeholder: replace with actual icon
+        searchIcon.setBorder(new EmptyBorder(0, 10, 0, 0));
+        JTextField searchField = new JTextField("Tìm kiếm...");
+        searchField.setFont(new Font("Arial", Font.PLAIN, 16));
+        searchField.setForeground(new Color(100, 100, 100));
+        searchField.setBorder(null);
+        // Add placeholder behavior
+        searchField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (searchField.getText().equals("Tìm kiếm...")) {
+                    searchField.setText("");
+                    searchField.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (searchField.getText().isEmpty()) {
+                    searchField.setText("Tìm kiếm...");
+                    searchField.setForeground(new Color(100, 100, 100));
+                }
+            }
+        });
+        searchBox.add(searchIcon, BorderLayout.WEST);
+        searchBox.add(searchField, BorderLayout.CENTER);
+        searchPanel.add(searchBox, BorderLayout.CENTER);
+
+        // Stats cards panel
+        JPanel statsPanel = new JPanel(new GridLayout(1, 3, 25, 0));
+        statsPanel.setOpaque(false);
+        statsPanel.setBorder(new EmptyBorder(0, 40, 0, 40));
+
+        // Stock Total Card (Blue theme)
+        JPanel stockCard = createStatsCard("Stock Total", "2000$", "Increased by 60%", "box-icon.png",
+                new Color(135, 206, 250), new Color(70, 130, 180));
+        statsPanel.add(stockCard);
+
+        // Total Profit Card (Green theme)
+        JPanel profitCard = createStatsCard("Total Profit", "1500$", "Increased by 25%", "dollar-icon.png",
+                new Color(144, 238, 144), new Color(34, 139, 34));
+        statsPanel.add(profitCard);
+
+        // Unique Visitors Card (Orange theme)
+        JPanel visitorsCard = createStatsCard("Unique Visitors", "30000$", "Increased by 70%", "users-icon.png",
+                new Color(255, 218, 185), new Color(255, 140, 0));
+        statsPanel.add(visitorsCard);
+
+        // Charts section (placeholder with a styled panel)
+        JPanel chartsPanel = new JPanel(new BorderLayout());
+        chartsPanel.setOpaque(false);
+        chartsPanel.setBorder(new EmptyBorder(0, 40, 0, 40));
+        JPanel chartPlaceholder = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                GradientPaint gp = new GradientPaint(0, 0, Color.WHITE, 0, getHeight(), new Color(245, 245, 245));
+                g2d.setPaint(gp);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
+        chartPlaceholder.setBorder(new LineBorder(new Color(200, 200, 200), 1));
+        JLabel chartsLabel = new JLabel("Charts Section (Placeholder)", SwingConstants.CENTER);
+        chartsLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        chartsLabel.setForeground(new Color(50, 50, 50));
+        chartPlaceholder.add(chartsLabel);
+        chartPlaceholder.setPreferredSize(new Dimension(800, 200));
+        chartsPanel.add(chartPlaceholder, BorderLayout.CENTER);
+
+        // Recent Orders Table
+        JPanel tablePanel = new JPanel(new BorderLayout());
+        tablePanel.setOpaque(false);
+        tablePanel.setBorder(new EmptyBorder(0, 40, 40, 40));
+
+        JLabel tableTitle = new JLabel("Recent Orders");
+        tableTitle.setFont(new Font("Arial", Font.BOLD, 18));
+        tableTitle.setForeground(new Color(30, 30, 30));
+        tablePanel.add(tableTitle, BorderLayout.NORTH);
+
+        // Table setup with styled appearance
+        String[] columnNames = {"Name", "Email", "User Type", "Joined", "Status"};
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+        JTable userTable = new JTable(tableModel);
+        userTable.setFillsViewportHeight(true);
+        userTable.setBackground(Color.WHITE);
+        userTable.setGridColor(new Color(200, 200, 200));
+        userTable.setFont(new Font("Arial", Font.PLAIN, 14));
+        userTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
+        userTable.getTableHeader().setBackground(new Color(70, 130, 180));
+        userTable.getTableHeader().setForeground(Color.WHITE);
+        JScrollPane tableScrollPane = new JScrollPane(userTable);
+        tableScrollPane.setBorder(new LineBorder(new Color(70, 130, 180), 2));
+        tablePanel.add(tableScrollPane, BorderLayout.CENTER);
+
+        // Add all panels to main panel
+        mainPanel.add(searchPanel);
+        mainPanel.add(Box.createVerticalStrut(30));
+        mainPanel.add(statsPanel);
+        mainPanel.add(Box.createVerticalStrut(30));
+        mainPanel.add(chartsPanel);
+        mainPanel.add(Box.createVerticalStrut(30));
+        mainPanel.add(tablePanel);
+
+        // Add main panel to frame
+        add(mainPanel);
+    }
+
+    private JPanel createStatsCard(String title, String value, String subtitle, String iconPath,
+                                  Color gradientStart, Color gradientEnd) {
+        JPanel Modifycard = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                GradientPaint gp = new GradientPaint(0, 0, gradientStart, 0, getHeight(), gradientEnd);
+                g2d.setPaint(gp);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
+        Modifycard.setLayout(new BoxLayout(Modifycard, BoxLayout.Y_AXIS));
+        Modifycard.setBorder(BorderFactory.createCompoundBorder(
+                new LineBorder(gradientEnd, 2, true),
+                new EmptyBorder(10, 10, 10, 10)));
+
+        JLabel iconLabel = new JLabel(new ImageIcon(iconPath)); // Placeholder: replace with actual icon
+        iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel titleLabel = new JLabel(title);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel valueLabel = new JLabel(value);
+        valueLabel.setFont(new Font("Arial", Font.BOLD, 28));
+        valueLabel.setForeground(Color.WHITE);
+        valueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel subtitleLabel = new JLabel(subtitle);
+        subtitleLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        subtitleLabel.setForeground(new Color(240, 240, 240));
+        subtitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        Modifycard.add(Box.createVerticalStrut(10));
+        Modifycard.add(iconLabel);
+        Modifycard.add(Box.createVerticalStrut(10));
+        Modifycard.add(titleLabel);
+        Modifycard.add(Box.createVerticalStrut(5));
+        Modifycard.add(valueLabel);
+        Modifycard.add(Box.createVerticalStrut(5));
+        Modifycard.add(subtitleLabel);
+        Modifycard.add(Box.createVerticalStrut(10));
+
+        return Modifycard;
+    }
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * @param args the command line arguments
+     */
+   public static void main(String args[]) {
+        SwingUtilities.invokeLater(() -> {
+            Dashboard dashboard = new Dashboard();
+            dashboard.setVisible(true);
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // End of variables declaration//GEN-END:variables
+}
