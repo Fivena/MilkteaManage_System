@@ -12,9 +12,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class UserManage extends JFrame {
     public UserManage() {
-        setTitle("User Management");
-        setSize(900, 700); // Default size, will be overridden by parent
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // Set layout for the panel
+        setLayout(new BorderLayout());
 
         // Main panel with a light background
         JPanel mainPanel = new JPanel(new BorderLayout()) {
@@ -33,7 +32,7 @@ public class UserManage extends JFrame {
         // Header
         JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         headerPanel.setOpaque(false);
-        JLabel headerLabel = new JLabel("User Management");
+        JLabel headerLabel = new JLabel("Quản Lý Người Dùng");
         headerLabel.setFont(new Font("Arial", Font.BOLD, 20));
         headerLabel.setForeground(new Color(30, 30, 30));
         headerPanel.add(headerLabel);
@@ -48,16 +47,17 @@ public class UserManage extends JFrame {
         // Search bar
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         searchPanel.setOpaque(false);
-        JLabel searchLabel = new JLabel("Search:");
+        JLabel searchLabel = new JLabel("Tìm kiếm:");
         searchLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        JTextField searchField = new JTextField("Enter username or email...");
+        JTextField searchField = new JTextField("Nhập tên người dùng hoặc email...");
         searchField.setFont(new Font("Arial", Font.PLAIN, 14));
         searchField.setPreferredSize(new Dimension(300, 30));
         searchField.setForeground(new Color(100, 100, 100));
+        searchLabel.setBorder(BorderFactory.createEmptyBorder());
         searchField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
-                if (searchField.getText().equals("Enter username or email...")) {
+                if (searchField.getText().equals("Nhập tên người dùng hoặc email...")) {
                     searchField.setText("");
                     searchField.setForeground(Color.BLACK);
                 }
@@ -65,16 +65,16 @@ public class UserManage extends JFrame {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (searchField.getText().isEmpty()) {
-                    searchField.setText("Enter username or email...");
+                    searchField.setText("Nhập tên người dùng hoặc email...");
                     searchField.setForeground(new Color(100, 100, 100));
                 }
             }
         });
-        JButton searchButton = new JButton("Search");
+        JButton searchButton = new JButton("Tìm kiếm");
         searchButton.setFont(new Font("Arial", Font.PLAIN, 14));
         searchButton.setBackground(new Color(70, 130, 180));
         searchButton.setForeground(Color.WHITE);
-        searchButton.setBorder(new LineBorder(new Color(50, 100, 150), 1));
+        searchButton.setBorder(BorderFactory.createEmptyBorder());
         searchPanel.add(searchLabel);
         searchPanel.add(searchField);
         searchPanel.add(searchButton);
@@ -90,6 +90,7 @@ public class UserManage extends JFrame {
         userTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         userTable.getTableHeader().setBackground(new Color(70, 130, 180));
         userTable.getTableHeader().setForeground(Color.WHITE);
+        userTable.getTableHeader().setOpaque(false); // Ensure header background is applied
         JScrollPane tableScrollPane = new JScrollPane(userTable);
         tableScrollPane.setBorder(new LineBorder(new Color(70, 130, 180), 2));
 
@@ -103,15 +104,15 @@ public class UserManage extends JFrame {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         buttonPanel.setOpaque(false);
         buttonPanel.setBorder(new EmptyBorder(10, 0, 10, 0));
-        JButton addButton = new JButton("Add User");
+        JButton addButton = new JButton("Thêm Người Dùng");
         addButton.setFont(new Font("Arial", Font.PLAIN, 14));
         addButton.setBackground(new Color(34, 139, 34));
         addButton.setForeground(Color.WHITE);
-        JButton editButton = new JButton("Edit User");
+        JButton editButton = new JButton("Sửa Người Dùng");
         editButton.setFont(new Font("Arial", Font.PLAIN, 14));
         editButton.setBackground(new Color(255, 140, 0));
         editButton.setForeground(Color.WHITE);
-        JButton deleteButton = new JButton("Delete User");
+        JButton deleteButton = new JButton("Xóa Người Dùng");
         deleteButton.setFont(new Font("Arial", Font.PLAIN, 14));
         deleteButton.setBackground(new Color(220, 20, 60));
         deleteButton.setForeground(Color.WHITE);
@@ -122,6 +123,7 @@ public class UserManage extends JFrame {
 
         add(mainPanel);
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -147,9 +149,19 @@ public class UserManage extends JFrame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+          try {
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         SwingUtilities.invokeLater(() -> {
-            UserManage userManage = new UserManage();
-            userManage.setVisible(true);
+            JFrame frame = new JFrame("User Management");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setPreferredSize(new Dimension(900, 700));
+            frame.add(new UserManage());
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
         });
     
     }

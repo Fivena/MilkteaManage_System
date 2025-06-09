@@ -5,6 +5,8 @@
 package com.appsystem.milkteamanage_system;
 
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,8 +24,7 @@ import javax.swing.border.LineBorder;
 public class Home extends javax.swing.JFrame {
 
     private JPanel mainContentPanel;
-    private JButton activeButton; // Track active navigation button
-    // Declare buttons as instance fields to ensure initialization
+    private JButton activeButton; 
     private JButton dashboardButton;
     private JButton usersButton;
     private JButton productsButton;
@@ -39,7 +40,7 @@ public class Home extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
-
+        
         // Main BorderLayout with root background
        setLayout(new BorderLayout());
         JPanel rootPanel = new JPanel(new BorderLayout()) {
@@ -290,7 +291,8 @@ public class Home extends javax.swing.JFrame {
         mainContentPanel.repaint();
     }
 
-    private void showUsersManage() {
+
+     private void showUsersManage() {
         mainContentPanel.removeAll();
         UserManage userManagePanel = new UserManage();
         mainContentPanel.add(userManagePanel.getContentPane(), BorderLayout.CENTER);

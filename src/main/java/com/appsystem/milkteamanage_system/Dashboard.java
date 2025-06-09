@@ -9,16 +9,12 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author Admin
  */
 public class Dashboard extends javax.swing.JFrame {
 
-    /**
-     * Creates new form dashboard
-     */
     public Dashboard() {
         setTitle("Bubble Tea Management System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -227,7 +223,7 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   public static void main(String args[]) {
+  public static void main(String args[]) {
         SwingUtilities.invokeLater(() -> {
             Dashboard dashboard = new Dashboard();
             dashboard.setVisible(true);
