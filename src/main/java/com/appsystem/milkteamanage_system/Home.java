@@ -37,11 +37,11 @@ public class Home extends javax.swing.JFrame {
    public Home() throws IOException {
         setTitle("Bubble Tea Management System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200, 700);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
 
         // Main BorderLayout with root background
-        setLayout(new BorderLayout());
+       setLayout(new BorderLayout());
         JPanel rootPanel = new JPanel(new BorderLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -67,7 +67,7 @@ public class Home extends javax.swing.JFrame {
             }
         };
         sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
-        sidebar.setPreferredSize(new Dimension(280, getHeight())); // -fx-sidebar-width: 280px
+        sidebar.setPreferredSize(new Dimension(280, getHeight()));
         sidebar.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         // Logo container
@@ -81,16 +81,16 @@ public class Home extends javax.swing.JFrame {
             }
         };
         logoContainer.setOpaque(false);
-        logoContainer.setBorder(new EmptyBorder(10, 10, 10, 10)); 
-            
+        logoContainer.setBorder(new EmptyBorder(5, 10, 5, 10)); // Reduced top/bottom padding to 5px
+        logoContainer.setPreferredSize(new Dimension(280, 200)); // Set fixed height to 50px
+        logoContainer.setMaximumSize(new Dimension(280, 200)); // Enforce height limit
         JLabel logoImage = new JLabel();
-        logoImage.setIcon(loadAndResizeIcon("src/images/milk-tea.png", 40, 40));
-        logoImage.setHorizontalAlignment(SwingConstants.CENTER);
+        logoImage.setIcon(loadAndResizeIcon("src/main/images/milk-tea.png", 30, 30)); // Reduced icon size to 30x30px
         logoImage.setHorizontalAlignment(SwingConstants.CENTER);
         logoImage.setOpaque(false);
         JLabel logoLabel = new JLabel("Chào bạn, Admin");
-        logoLabel.setFont(new Font("Segoe UI", Font.BOLD, 22));
-        logoLabel.setForeground(Color.WHITE); 
+        logoLabel.setFont(new Font("Segoe UI", Font.BOLD, 18)); // Reduced font size to 18pt
+        logoLabel.setForeground(Color.WHITE);
         logoContainer.add(logoImage, BorderLayout.WEST);
         logoContainer.add(logoLabel, BorderLayout.CENTER);
 
