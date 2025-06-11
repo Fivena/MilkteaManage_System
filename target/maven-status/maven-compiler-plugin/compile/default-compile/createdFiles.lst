@@ -1,5 +1,6 @@
 com\appsystem\milkteamanage_system\Home.class
 com\appsystem\milkteamanage_system\Dashboard$2.class
+com\appsystem\milkteamanage_system\Database\DBConnection.class
 com\appsystem\milkteamanage_system\ProductManage.class
 com\appsystem\milkteamanage_system\Dashboard$1.class
 com\appsystem\milkteamanage_system\Home$4.class

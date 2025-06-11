@@ -80,7 +80,7 @@ public class UserManage extends JFrame {
         searchPanel.add(searchButton);
 
         // Table
-        String[] columnNames = {"Tên", "Email", "Vai Trò", "Trạng thái"};
+        String[] columnNames = {"ID","Tên","Số Điện Thoại","Email", "Vai Trò", "username","password"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
         JTable userTable = new JTable(tableModel);
         userTable.setFillsViewportHeight(true);

@@ -86,7 +86,7 @@ public class Home extends javax.swing.JFrame {
         logoContainer.setPreferredSize(new Dimension(280, 200)); // Set fixed height to 50px
         logoContainer.setMaximumSize(new Dimension(280, 200)); // Enforce height limit
         JLabel logoImage = new JLabel();
-        logoImage.setIcon(loadAndResizeIcon("src/main/images/milk-tea.png", 30, 30)); // Reduced icon size to 30x30px
+        logoImage.setIcon(loadAndResizeIcon("src/main/Resources/images/milk-tea.png", 30, 30)); // Reduced icon size to 30x30px
         logoImage.setHorizontalAlignment(SwingConstants.CENTER);
         logoImage.setOpaque(false);
         JLabel logoLabel = new JLabel("Chào bạn, Admin");

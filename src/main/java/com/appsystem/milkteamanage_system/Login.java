@@ -96,7 +96,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-         String username = txtUsername.getText();
+        String username = txtUsername.getText();
         String password = txtPassword.getText();
         String sqlquery = "select * from Staffs Where Username='" + username + "' And Password='" + password + "'";
         try {
