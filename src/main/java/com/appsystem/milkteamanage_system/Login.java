@@ -98,7 +98,7 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
          String username = txtUsername.getText();
         String password = txtPassword.getText();
-        String sqlquery = "select * from [milktea].[dbo].[user] Where username='" + username + "' And password='" + password + "'";
+        String sqlquery = "select * from Staffs Where Username='" + username + "' And Password='" + password + "'";
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost\\ANHDUY:1433;databaseName=milktea;encrypt=true;trustServerCertificate=true", "admin", "666666");
