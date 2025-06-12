@@ -4,16 +4,17 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 
-public class  TableBackGroundRender   extends DefaultTableCellRenderer {
+public class TableBackGroundRender extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        // Áp dụng màu xanh lá cho cột "Name" (cột 0) và "Email" (cột 1)
-        if (column == 0 || column == 1) {
-            cell.setForeground(Color.GREEN);
+        setOpaque(true); // Đảm bảo ô bảng không trong suốt
+        if (!isSelected) {
+            cell.setBackground(new Color(70, 130, 180)); // Màu xanh biển
         } else {
-            cell.setForeground(table.getForeground()); // Giữ màu chữ mặc định cho các cột khác
+            cell.setBackground(table.getSelectionBackground()); // Giữ màu chọn mặc định
         }
+        cell.setForeground(Color.WHITE); // Chữ trắng để dễ đọc trên nền xanh
         return cell;
     }
 }

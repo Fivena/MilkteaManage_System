@@ -16,8 +16,10 @@ public class Dashboard extends javax.swing.JPanel {
      * Creates new form Dashboard
      */
      public Dashboard() {
+        setLayout(new BorderLayout());
+
         // Main panel with a light gradient background
-        JPanel mainPanel = new JPanel() {
+        JPanel mainPanel = new JPanel(new BorderLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -28,19 +30,24 @@ public class Dashboard extends javax.swing.JPanel {
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         mainPanel.setPreferredSize(new Dimension(900, 700));
+
+        // Nội dung trung gian với BoxLayout để xếp dọc
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel.setOpaque(false);
 
         // Search bar panel
         JPanel searchPanel = new JPanel(new BorderLayout());
         searchPanel.setOpaque(false);
-        searchPanel.setBorder(new EmptyBorder(30, 40, 20, 40));
+        searchPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        searchPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
 
         JPanel searchBox = new JPanel(new BorderLayout(5, 0));
         searchBox.setBorder(new LineBorder(new Color(70, 130, 180), 2, true));
         searchBox.setBackground(Color.WHITE);
-        JLabel searchIcon = new JLabel(new ImageIcon("search-icon.png")); // Placeholder: replace with actual icon
+        JLabel searchIcon = new JLabel(new ImageIcon("src/main/resources/images/search-icon.png"));
         searchIcon.setBorder(new EmptyBorder(0, 10, 0, 0));
         JTextField searchField = new JTextField("Tìm kiếm...");
         searchField.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -67,29 +74,28 @@ public class Dashboard extends javax.swing.JPanel {
         searchPanel.add(searchBox, BorderLayout.CENTER);
 
         // Stats cards panel
-        JPanel statsPanel = new JPanel(new GridLayout(1, 3, 25, 0));
+        JPanel statsPanel = new JPanel(new GridLayout(1, 3, 10, 0));
         statsPanel.setOpaque(false);
-        statsPanel.setBorder(new EmptyBorder(0, 40, 0, 40));
+        statsPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        statsPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 150));
 
-        // Stock Total Card (Blue theme)
-        JPanel stockCard = createStatsCard("Stock Total", "2000$", "Increased by 60%", "box-icon.png",
+        JPanel stockCard = createStatsCard("Stock Total", "2000$", "Increased by 60%", "src/main/resources/images/box-icon.png",
                 new Color(135, 206, 250), new Color(70, 130, 180));
         statsPanel.add(stockCard);
 
-        // Total Profit Card (Green theme)
-        JPanel profitCard = createStatsCard("Total Profit", "1500$", "Increased by 25%", "dollar-icon.png",
+        JPanel profitCard = createStatsCard("Total Profit", "1500$", "Increased by 25%", "src/main/resources/images/dollar-icon.png",
                 new Color(144, 238, 144), new Color(34, 139, 34));
         statsPanel.add(profitCard);
 
-        // Unique Visitors Card (Orange theme)
-        JPanel visitorsCard = createStatsCard("Unique Visitors", "30000$", "Increased by 70%", "users-icon.png",
+        JPanel visitorsCard = createStatsCard("Unique Visitors", "30000$", "Increased by 70%", "src/main/resources/images/users-icon.png",
                 new Color(255, 218, 185), new Color(255, 140, 0));
         statsPanel.add(visitorsCard);
 
-        // Charts section (placeholder with a styled panel)
+        // Charts section
         JPanel chartsPanel = new JPanel(new BorderLayout());
         chartsPanel.setOpaque(false);
-        chartsPanel.setBorder(new EmptyBorder(0, 40, 0, 40));
+        chartsPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        chartsPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 220));
         JPanel chartPlaceholder = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -106,20 +112,18 @@ public class Dashboard extends javax.swing.JPanel {
         chartsLabel.setFont(new Font("Arial", Font.BOLD, 18));
         chartsLabel.setForeground(new Color(50, 50, 50));
         chartPlaceholder.add(chartsLabel);
-        chartPlaceholder.setPreferredSize(new Dimension(800, 200));
         chartsPanel.add(chartPlaceholder, BorderLayout.CENTER);
 
         // Recent Orders Table
         JPanel tablePanel = new JPanel(new BorderLayout());
         tablePanel.setOpaque(false);
-        tablePanel.setBorder(new EmptyBorder(0, 40, 40, 40));
+        tablePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         JLabel tableTitle = new JLabel("Recent Orders");
         tableTitle.setFont(new Font("Arial", Font.BOLD, 18));
         tableTitle.setForeground(new Color(30, 30, 30));
         tablePanel.add(tableTitle, BorderLayout.NORTH);
 
-        // Table setup with styled appearance
         String[] columnNames = {"Name", "Email", "User Type", "Joined", "Status"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
         JTable userTable = new JTable(tableModel);
@@ -129,23 +133,27 @@ public class Dashboard extends javax.swing.JPanel {
         userTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         userTable.getTableHeader().setBackground(new Color(70, 130, 180));
         userTable.getTableHeader().setForeground(Color.WHITE);
-        // Áp dụng TableBackGroundRender để bảng có màu xanh
         userTable.setDefaultRenderer(Object.class, new TableBackGroundRender());
         userTable.setOpaque(true);
+        userTable.setBackground(new Color(70, 130, 180));
         JScrollPane tableScrollPane = new JScrollPane(userTable);
         tableScrollPane.setBorder(new LineBorder(new Color(70, 130, 180), 2));
+        tableScrollPane.setOpaque(true);
+        tableScrollPane.getViewport().setOpaque(true);
+        tableScrollPane.getViewport().setBackground(new Color(70, 130, 180));
         tablePanel.add(tableScrollPane, BorderLayout.CENTER);
 
-        // Add all panels to main panel
-        mainPanel.add(searchPanel);
-        mainPanel.add(Box.createVerticalStrut(30));
-        mainPanel.add(statsPanel);
-        mainPanel.add(Box.createVerticalStrut(30));
-        mainPanel.add(chartsPanel);
-        mainPanel.add(Box.createVerticalStrut(30));
-        mainPanel.add(tablePanel);
+        // Thêm các panel vào contentPanel
+        contentPanel.add(searchPanel);
+        contentPanel.add(Box.createVerticalStrut(10));
+        contentPanel.add(statsPanel);
+        contentPanel.add(Box.createVerticalStrut(10));
+        contentPanel.add(chartsPanel);
+        contentPanel.add(Box.createVerticalStrut(10));
+        contentPanel.add(tablePanel);
 
-        // Add main panel to this panel
+        // Thêm contentPanel vào mainPanel
+        mainPanel.add(contentPanel, BorderLayout.CENTER);
         add(mainPanel);
     }
 
@@ -167,7 +175,7 @@ public class Dashboard extends javax.swing.JPanel {
                 new LineBorder(gradientEnd, 2, true),
                 new EmptyBorder(10, 10, 10, 10)));
 
-        JLabel iconLabel = new JLabel(new ImageIcon(iconPath)); // Placeholder: replace with actual icon
+        JLabel iconLabel = new JLabel(new ImageIcon(iconPath));
         iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel titleLabel = new JLabel(title);

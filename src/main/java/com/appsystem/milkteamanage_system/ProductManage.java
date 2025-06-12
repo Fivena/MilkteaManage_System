@@ -17,6 +17,8 @@ public class ProductManage extends javax.swing.JPanel {
      * Creates new form ProductManage
      */
     public ProductManage() {
+        setLayout(new BorderLayout());
+
         // Main panel with a pinkish background
         JPanel mainPanel = new JPanel(new BorderLayout()) {
             @Override
@@ -29,7 +31,7 @@ public class ProductManage extends javax.swing.JPanel {
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
-        mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         mainPanel.setPreferredSize(new Dimension(900, 700));
 
         // Header
@@ -43,6 +45,7 @@ public class ProductManage extends javax.swing.JPanel {
         JPanel statsPlaceholder = new JPanel(new BorderLayout());
         statsPlaceholder.setOpaque(false);
         statsPlaceholder.setBorder(new LineBorder(new Color(200, 200, 200), 1));
+        statsPlaceholder.setPreferredSize(new Dimension(880, 650)); // Lấp đầy không gian trung tâm
         JLabel placeholderLabel = new JLabel("Stats Cards (Placeholder)", SwingConstants.CENTER);
         placeholderLabel.setFont(new Font("Arial", Font.BOLD, 18));
         placeholderLabel.setForeground(Color.WHITE);

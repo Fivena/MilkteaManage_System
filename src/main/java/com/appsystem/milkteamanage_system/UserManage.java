@@ -20,10 +20,8 @@ public class UserManage extends javax.swing.JPanel {
      * Creates new form UserManage
      */
     public UserManage() {
-        // Set layout for the panel
         setLayout(new BorderLayout());
 
-        // Main panel with a light gradient background
         JPanel mainPanel = new JPanel(new BorderLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -38,7 +36,6 @@ public class UserManage extends javax.swing.JPanel {
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         mainPanel.setPreferredSize(new Dimension(900, 700));
 
-        // Header
         JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         headerPanel.setOpaque(false);
         JLabel headerLabel = new JLabel("Quản Lý Người Dùng");
@@ -47,13 +44,11 @@ public class UserManage extends javax.swing.JPanel {
         headerPanel.add(headerLabel);
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
-        // Center panel
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setOpaque(false);
         centerPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 
-        // Search bar
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         searchPanel.setOpaque(false);
         JLabel searchLabel = new JLabel("Tìm kiếm:");
@@ -89,8 +84,7 @@ public class UserManage extends javax.swing.JPanel {
         searchPanel.add(searchField);
         searchPanel.add(searchButton);
 
-        // Table
-        String[] columnNames = {"ID", "Tên", "Số Điện Thoại", "Email", "Vai Trò", "Username", "Password"};
+        String[] columnNames = {"ID", "Tên", "Số Điện Thoại", "Email", "Vai Trò", "username", "password"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
         JTable userTable = new JTable(tableModel);
         userTable.setFillsViewportHeight(true);
@@ -98,13 +92,15 @@ public class UserManage extends javax.swing.JPanel {
         userTable.setFont(new Font("Arial", Font.PLAIN, 14));
         userTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         userTable.getTableHeader().setBackground(new Color(70, 130, 180));
-        userTable.getTableHeader().setForeground(Color.WHITE);
-        userTable.getTableHeader().setOpaque(false);
-        // Áp dụng TableBackGroundRender và đảm bảo opaque
+        userTable.getTableHeader().setForeground(Color.BLACK);
         userTable.setDefaultRenderer(Object.class, new TableBackGroundRender());
         userTable.setOpaque(true);
+        userTable.setBackground(new Color(70, 130, 180)); // Đặt màu nền dự phòng
         JScrollPane tableScrollPane = new JScrollPane(userTable);
         tableScrollPane.setBorder(new LineBorder(new Color(70, 130, 180), 2));
+        tableScrollPane.setOpaque(true);
+        tableScrollPane.getViewport().setOpaque(true);
+        tableScrollPane.getViewport().setBackground(new Color(70, 130, 180)); // Đặt màu nền viewport
 
         centerPanel.add(searchPanel);
         centerPanel.add(Box.createVerticalStrut(20));
@@ -112,7 +108,6 @@ public class UserManage extends javax.swing.JPanel {
 
         mainPanel.add(centerPanel, BorderLayout.CENTER);
 
-        // Bottom buttons
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         buttonPanel.setOpaque(false);
         buttonPanel.setBorder(new EmptyBorder(10, 0, 10, 0));
