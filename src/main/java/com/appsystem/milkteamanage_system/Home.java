@@ -36,33 +36,31 @@ public class Home extends javax.swing.JFrame {
 
     
    public Home() throws IOException {
-        setTitle("Bubble Tea Management System");
+         setTitle("Bubble Tea Management System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         
-        // Main BorderLayout with root background
-       setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
         JPanel rootPanel = new JPanel(new BorderLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-                g2d.setPaint(new Color(240, 242, 245)); // -fx-background-color: #f0f2f5
+                g2d.setPaint(new Color(240, 242, 245));
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
         setContentPane(rootPanel);
 
-        // Sidebar (equivalent to .sidebar)
         JPanel sidebar = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-                GradientPaint gp = new GradientPaint(0, 0, new Color(0, 180, 219), 0, getHeight(), new Color(0, 131, 176)); // -fx-primary-gradient-start/end
+                GradientPaint gp = new GradientPaint(0, 0, new Color(0, 180, 219), 0, getHeight(), new Color(0, 131, 176));
                 g2d.setPaint(gp);
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
@@ -71,44 +69,40 @@ public class Home extends javax.swing.JFrame {
         sidebar.setPreferredSize(new Dimension(280, getHeight()));
         sidebar.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        // Logo container
         JPanel logoContainer = new JPanel(new BorderLayout(15, 0)) {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 Graphics2D g2d = (Graphics2D) g;
-                g2d.setPaint(new Color(255, 255, 255, 25)); // rgba(255,255,255,0.1)
+                g2d.setPaint(new Color(255, 255, 255, 25));
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
         logoContainer.setOpaque(false);
-        logoContainer.setBorder(new EmptyBorder(5, 10, 5, 10)); // Reduced top/bottom padding to 5px
-        logoContainer.setPreferredSize(new Dimension(280, 200)); // Set fixed height to 50px
-        logoContainer.setMaximumSize(new Dimension(280, 200)); // Enforce height limit
+        logoContainer.setBorder(new EmptyBorder(5, 10, 5, 10));
+        logoContainer.setPreferredSize(new Dimension(280, 200));
+        logoContainer.setMaximumSize(new Dimension(280, 200));
         JLabel logoImage = new JLabel();
-        logoImage.setIcon(loadAndResizeIcon("src/main/Resources/images/milk-tea.png", 30, 30)); // Reduced icon size to 30x30px
+        logoImage.setIcon(loadAndResizeIcon("src/main/Resources/images/milk-tea.png", 30, 30));
         logoImage.setHorizontalAlignment(SwingConstants.CENTER);
         logoImage.setOpaque(false);
         JLabel logoLabel = new JLabel("Chào bạn, Admin");
-        logoLabel.setFont(new Font("Segoe UI", Font.BOLD, 18)); // Reduced font size to 18pt
+        logoLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
         logoLabel.setForeground(Color.WHITE);
         logoContainer.add(logoImage, BorderLayout.WEST);
         logoContainer.add(logoLabel, BorderLayout.CENTER);
 
-        // Main Menu
         JPanel mainMenu = new JPanel();
         mainMenu.setLayout(new BoxLayout(mainMenu, BoxLayout.Y_AXIS));
         mainMenu.setOpaque(false);
-        mainMenu.setBorder(new EmptyBorder(20, 0, 20, 0)); // Reduced right padding
+        mainMenu.setBorder(new EmptyBorder(20, 0, 20, 0));
         JLabel mainMenuHeader = new JLabel("MAIN MENU");    
         mainMenuHeader.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mainMenuHeader.setFont(new Font("Segoe UI", Font.BOLD, 13)); // -fx-font-size: 13px
-        mainMenuHeader.setForeground(new Color(255, 255, 255, 179)); // rgba(255,255,255,0.7)
-//        mainMenuHeader.setBorder(new EmptyBorder(10, 0, 5, 0)); // Reduced right padding
+        mainMenuHeader.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        mainMenuHeader.setForeground(new Color(255, 255, 255, 179));
         mainMenu.add(mainMenuHeader);
         mainMenu.add(Box.createVerticalStrut(10));
 
-        // Navigation buttons
         dashboardButton = createNavButton("Dashboard", "🏠", e -> {
             showDashboard();
             setActiveButton(dashboardButton);
@@ -136,16 +130,15 @@ public class Home extends javax.swing.JFrame {
         statsButton = createNavButton("Thống Kê", "chart-icon.png", e -> setActiveButton(statsButton));
         mainMenu.add(statsButton);
 
-        // Additional Menu
         JPanel additionalMenu = new JPanel();
         additionalMenu.setLayout(new BoxLayout(additionalMenu, BoxLayout.Y_AXIS));
         additionalMenu.setOpaque(false);
-        additionalMenu.setBorder(new EmptyBorder(20, 10, 20, 10)); // Reduced right padding
+        additionalMenu.setBorder(new EmptyBorder(20, 10, 20, 10));
         JLabel additionalMenuHeader = new JLabel("MY DATA");
         additionalMenuHeader.setAlignmentX(Component.CENTER_ALIGNMENT);
         additionalMenuHeader.setFont(new Font("Segoe UI", Font.BOLD, 13));
         additionalMenuHeader.setForeground(new Color(255, 255, 255, 179));
-        additionalMenuHeader.setBorder(new EmptyBorder(10, 15, 5, 15)); // Reduced right padding
+        additionalMenuHeader.setBorder(new EmptyBorder(10, 15, 5, 15));
         additionalMenu.add(additionalMenuHeader);
         additionalMenu.add(Box.createVerticalStrut(5));
         testButton = createNavButton("TEST", "plus-icon.png", e -> setActiveButton(testButton));
@@ -155,8 +148,8 @@ public class Home extends javax.swing.JFrame {
         additionalMenu.add(optionsButton);
         additionalMenu.add(createSeparator());
         logoutButton = createNavButton("Đăng Xuất", "logout-icon.png", e ->{ 
-        setActiveButton(logoutButton);
-        this.dispose();
+            setActiveButton(logoutButton);
+            this.dispose();
         });
         additionalMenu.add(logoutButton);
 
@@ -164,41 +157,34 @@ public class Home extends javax.swing.JFrame {
         sidebar.add(mainMenu);
         sidebar.add(additionalMenu);
 
-        // Main content area
         mainContentPanel = new JPanel(new BorderLayout());
-        mainContentPanel.setBackground(new Color(240, 242, 245)); // -fx-background-color: #f0f2f5
+        mainContentPanel.setBackground(new Color(240, 242, 245));
 
-        // Add components to frame
         rootPanel.add(sidebar, BorderLayout.WEST);
         rootPanel.add(mainContentPanel, BorderLayout.CENTER);
 
-        // Show dashboard by default and set active button
         showDashboard();
         setActiveButton(dashboardButton);
     }
-     private ImageIcon loadAndResizeIcon(String iconPath, int width, int height) throws IOException {
-         // Kiểm tra nếu iconPath là emoji
-         if (iconPath.length() <= 2 && Character.isHighSurrogate(iconPath.charAt(0))) {
-             // Tạo icon từ emoji
-             return createEmojiIcon(iconPath, width, height);
-         }
-         // Load image file
-         File iconFile = new File(iconPath);
-         if (!iconFile.exists()) {
-             System.out.println("Icon file not found: " + iconPath);
-             return createDefaultIcon(width, height);
-         }
-         BufferedImage originalImage = ImageIO.read(iconFile);
-         if (originalImage == null) {
-             System.out.println("Could not read image: " + iconPath);
-             return createDefaultIcon(width, height);
-         }
-         // Resize image with high quality
-         Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-         return new ImageIcon(resizedImage);
+
+    private ImageIcon loadAndResizeIcon(String iconPath, int width, int height) throws IOException {
+        if (iconPath.length() <= 2 && Character.isHighSurrogate(iconPath.charAt(0))) {
+            return createEmojiIcon(iconPath, width, height);
+        }
+        File iconFile = new File(iconPath);
+        if (!iconFile.exists()) {
+            System.out.println("Icon file not found: " + iconPath);
+            return createDefaultIcon(width, height);
+        }
+        BufferedImage originalImage = ImageIO.read(iconFile);
+        if (originalImage == null) {
+            System.out.println("Could not read image: " + iconPath);
+            return createDefaultIcon(width, height);
+        }
+        Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImage);
     }
     
-    // Create emoji icon
     private ImageIcon createEmojiIcon(String emoji, int width, int height) {
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = image.createGraphics();
@@ -212,7 +198,6 @@ public class Home extends javax.swing.JFrame {
         return new ImageIcon(image);
     }
     
-    // Create default icon when image loading fails
     private ImageIcon createDefaultIcon(int width, int height) {
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = image.createGraphics();
@@ -224,7 +209,6 @@ public class Home extends javax.swing.JFrame {
         g2d.dispose();
         return new ImageIcon(image);
     }
-    
 
     private JButton createNavButton(String text, String iconPath, java.awt.event.ActionListener action) {
         JButton button = new JButton(text) {
@@ -233,43 +217,41 @@ public class Home extends javax.swing.JFrame {
                 super.paintComponent(g);
                 Graphics2D g2d = (Graphics2D) g;
                 if (getModel().isRollover()) {
-                    g2d.setColor(new Color(255, 255, 255, 38)); // -fx-background-color: rgba(255,255,255,0.15) on hover
+                    g2d.setColor(new Color(255, 255, 255, 38));
                     g2d.fillRect(0, 0, getWidth(), getHeight());
                 }
                 if (getModel().isPressed()) {
-                    g2d.setColor(new Color(255, 255, 255, 51)); // -fx-background-color: rgba(255,255,255,0.2) on pressed
+                    g2d.setColor(new Color(255, 255, 255, 51));
                     g2d.fillRect(0, 0, getWidth(), getHeight());
                 }
                 if (this == activeButton) {
-                    g2d.setColor(new Color(255, 255, 255, 64)); // -fx-background-color: rgba(255,255,255,0.25) for active
+                    g2d.setColor(new Color(255, 255, 255, 64));
                     g2d.fillRect(0, 0, getWidth(), getHeight());
-                    g2d.setColor(new Color(255, 210, 0)); // -fx-border-color: #ffd200
-                    g2d.fillRect(0, 0, 4, getHeight()); // -fx-border-width: 0 0 0 4px
+                    g2d.setColor(new Color(255, 210, 0));
+                    g2d.fillRect(0, 0, 4, getHeight());
                 }
             }
         };
-        button.setFont(new Font("Segoe UI", Font.PLAIN, 14)); // -fx-font-size: 14px
-        button.setForeground(Color.WHITE); // -fx-text-fill: white
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        button.setForeground(Color.WHITE);
         button.setContentAreaFilled(false);
-        button.setBorder(new EmptyBorder(10, 15, 10, 15)); // Reduced left and right padding to 5px
+        button.setBorder(new EmptyBorder(10, 15, 10, 15));
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.setFocusPainted(false);   
-     
-        button.setMaximumSize(new Dimension(280, 40)); // Adjusted to fit within 280px sidebar minus padding
+        button.setMaximumSize(new Dimension(280, 40));
         button.setPreferredSize(new Dimension(280, 40));
-        button.setIcon(new ImageIcon(iconPath)); // Placeholder: replace with actual icon
+        button.setIcon(new ImageIcon(iconPath));
         button.setHorizontalAlignment(SwingConstants.LEFT);
-        button.setIconTextGap(10); // Reduced from 15 to 10 for better fit
+        button.setIconTextGap(10);
         if (action != null) {
             button.addActionListener(action);
         }
         return button;
     }
 
-
     private JSeparator createSeparator() {
         JSeparator separator = new JSeparator();
-        separator.setForeground(new Color(224, 224, 224)); // -fx-border-color: #e0e0e0
+        separator.setForeground(new Color(224, 224, 224));
         separator.setMaximumSize(new Dimension(Integer.MAX_VALUE, 1));
         separator.setOpaque(false);
         return separator;
@@ -277,25 +259,24 @@ public class Home extends javax.swing.JFrame {
 
     private void setActiveButton(JButton button) {
         if (activeButton != null) {
-            activeButton.repaint(); // Clear previous active state
+            activeButton.repaint();
         }
         activeButton = button;
-        button.repaint(); // Apply active state
+        button.repaint();
     }
 
     private void showDashboard() {
         mainContentPanel.removeAll();
         Dashboard dashboardPanel = new Dashboard();
-        mainContentPanel.add(dashboardPanel.getContentPane(), BorderLayout.CENTER);
+        mainContentPanel.add(dashboardPanel, BorderLayout.CENTER);
         mainContentPanel.revalidate();
         mainContentPanel.repaint();
     }
 
-
-     private void showUsersManage() {
+    private void showUsersManage() {
         mainContentPanel.removeAll();
         UserManage userManagePanel = new UserManage();
-        mainContentPanel.add(userManagePanel.getContentPane(), BorderLayout.CENTER);
+        mainContentPanel.add(userManagePanel, BorderLayout.CENTER);
         mainContentPanel.revalidate();
         mainContentPanel.repaint();
     }
@@ -303,7 +284,7 @@ public class Home extends javax.swing.JFrame {
     private void showProductsManage() {
         mainContentPanel.removeAll();
         ProductManage productManagePanel = new ProductManage();
-        mainContentPanel.add(productManagePanel.getContentPane(), BorderLayout.CENTER);
+        mainContentPanel.add(productManagePanel, BorderLayout.CENTER);
         mainContentPanel.revalidate();
         mainContentPanel.repaint();
     }

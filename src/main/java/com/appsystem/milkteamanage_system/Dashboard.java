@@ -1,26 +1,21 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.appsystem.milkteamanage_system;
-
+import com.appsystem.milkteamanage_system.Utils.TableBackGroundRender;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-/**
- *
- * @author Admin
- */
-public class Dashboard extends javax.swing.JFrame {
 
-    public Dashboard() {
-        setTitle("Bubble Tea Management System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 700);
-        setLocationRelativeTo(null);
+public class Dashboard extends javax.swing.JPanel {
 
+    /**
+     * Creates new form Dashboard
+     */
+     public Dashboard() {
         // Main panel with a light gradient background
         JPanel mainPanel = new JPanel() {
             @Override
@@ -35,6 +30,7 @@ public class Dashboard extends javax.swing.JFrame {
         };
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setPreferredSize(new Dimension(900, 700));
 
         // Search bar panel
         JPanel searchPanel = new JPanel(new BorderLayout());
@@ -50,7 +46,6 @@ public class Dashboard extends javax.swing.JFrame {
         searchField.setFont(new Font("Arial", Font.PLAIN, 16));
         searchField.setForeground(new Color(100, 100, 100));
         searchField.setBorder(null);
-        // Add placeholder behavior
         searchField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -129,12 +124,14 @@ public class Dashboard extends javax.swing.JFrame {
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
         JTable userTable = new JTable(tableModel);
         userTable.setFillsViewportHeight(true);
-        userTable.setBackground(Color.WHITE);
         userTable.setGridColor(new Color(200, 200, 200));
         userTable.setFont(new Font("Arial", Font.PLAIN, 14));
         userTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         userTable.getTableHeader().setBackground(new Color(70, 130, 180));
         userTable.getTableHeader().setForeground(Color.WHITE);
+        // Áp dụng TableBackGroundRender để bảng có màu xanh
+        userTable.setDefaultRenderer(Object.class, new TableBackGroundRender());
+        userTable.setOpaque(true);
         JScrollPane tableScrollPane = new JScrollPane(userTable);
         tableScrollPane.setBorder(new LineBorder(new Color(70, 130, 180), 2));
         tablePanel.add(tableScrollPane, BorderLayout.CENTER);
@@ -148,13 +145,13 @@ public class Dashboard extends javax.swing.JFrame {
         mainPanel.add(Box.createVerticalStrut(30));
         mainPanel.add(tablePanel);
 
-        // Add main panel to frame
+        // Add main panel to this panel
         add(mainPanel);
     }
 
     private JPanel createStatsCard(String title, String value, String subtitle, String iconPath,
                                   Color gradientStart, Color gradientEnd) {
-        JPanel Modifycard = new JPanel() {
+        JPanel card = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -165,8 +162,8 @@ public class Dashboard extends javax.swing.JFrame {
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
-        Modifycard.setLayout(new BoxLayout(Modifycard, BoxLayout.Y_AXIS));
-        Modifycard.setBorder(BorderFactory.createCompoundBorder(
+        card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
+        card.setBorder(BorderFactory.createCompoundBorder(
                 new LineBorder(gradientEnd, 2, true),
                 new EmptyBorder(10, 10, 10, 10)));
 
@@ -188,26 +185,30 @@ public class Dashboard extends javax.swing.JFrame {
         subtitleLabel.setForeground(new Color(240, 240, 240));
         subtitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        Modifycard.add(Box.createVerticalStrut(10));
-        Modifycard.add(iconLabel);
-        Modifycard.add(Box.createVerticalStrut(10));
-        Modifycard.add(titleLabel);
-        Modifycard.add(Box.createVerticalStrut(5));
-        Modifycard.add(valueLabel);
-        Modifycard.add(Box.createVerticalStrut(5));
-        Modifycard.add(subtitleLabel);
-        Modifycard.add(Box.createVerticalStrut(10));
+        card.add(Box.createVerticalStrut(10));
+        card.add(iconLabel);
+        card.add(Box.createVerticalStrut(10));
+        card.add(titleLabel);
+        card.add(Box.createVerticalStrut(5));
+        card.add(valueLabel);
+        card.add(Box.createVerticalStrut(5));
+        card.add(subtitleLabel);
+        card.add(Box.createVerticalStrut(10));
 
-        return Modifycard;
+        return card;
     }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
@@ -216,20 +217,24 @@ public class Dashboard extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-  public static void main(String args[]) {
+public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         SwingUtilities.invokeLater(() -> {
-            Dashboard dashboard = new Dashboard();
-            dashboard.setVisible(true);
+            JFrame frame = new JFrame("Dashboard");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setPreferredSize(new Dimension(900, 700));
+            frame.add(new Dashboard());
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

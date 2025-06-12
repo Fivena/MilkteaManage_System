@@ -4,12 +4,14 @@
  */
 package com.appsystem.milkteamanage_system;
 
+import com.appsystem.milkteamanage_system.Utils.DBConnection;
 import com.appsystem.milkteamanage_system.Home;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -96,24 +98,34 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        String username = txtUsername.getText();
-        String password = txtPassword.getText();
-        String sqlquery = "select * from Staffs Where Username='" + username + "' And Password='" + password + "'";
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost\\ANHDUY:1433;databaseName=milktea;encrypt=true;trustServerCertificate=true", "admin", "666666");
-            PreparedStatement pst = conn.prepareStatement(sqlquery);
+        String username = txtUsername.getText().trim();
+        String password = new String(txtPassword.getPassword()).trim();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu!");
+            return;
+        }
+
+        String sqlQuery = "SELECT * FROM Staffs WHERE Username = ? AND Password = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sqlQuery)) {
+            pst.setString(1, username);
+            pst.setString(2, password);
             ResultSet rs = pst.executeQuery();
-            if (!rs.next()) {
-                JOptionPane.showMessageDialog(null, "username and passwword is incorrect");
-            } else {
-                JOptionPane.showMessageDialog(null, "Login Successfully");
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Đăng nhập thành công!");
                 Home home = new Home();
                 home.setVisible(true);
                 this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Tên đăng nhập hoặc mật khẩu không đúng!");
             }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Lỗi kết nối cơ sở dữ liệu: " + e.getMessage());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Lỗi hệ thống: " + e.getMessage());
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
