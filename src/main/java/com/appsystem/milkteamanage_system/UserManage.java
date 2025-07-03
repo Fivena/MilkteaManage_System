@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
+
 public class UserManage extends javax.swing.JPanel {
 
      private JTable userTable;
@@ -36,6 +37,7 @@ public class UserManage extends javax.swing.JPanel {
         // Initialize tableModel first
         String[] columnNames = {"ID", "Tên", "Số Điện Thoại", "Email", "Vai Trò", "username", "password"};
         tableModel = new DefaultTableModel(columnNames, 0);
+   
 
         JPanel mainPanel = new JPanel(new BorderLayout()) {
             @Override
@@ -103,6 +105,9 @@ public class UserManage extends javax.swing.JPanel {
                 loadStaffData();
             }
         });
+        
+        
+        
         searchPanel.add(searchLabel);
         searchPanel.add(searchField);
         searchPanel.add(searchButton);
@@ -118,7 +123,9 @@ public class UserManage extends javax.swing.JPanel {
         userTable.setOpaque(true);
         userTable.setBackground(new Color(250, 240, 230)); // Linen
         userTable.setRowHeight(30);
-
+        
+       
+        
         // Add right-click context menu
         JPopupMenu contextMenu = new JPopupMenu();
         JMenuItem editItem = new JMenuItem("Sửa");
@@ -154,7 +161,9 @@ public class UserManage extends javax.swing.JPanel {
             }
         });
 
-        JScrollPane tableScrollPane = new JScrollPane(userTable);
+        
+        
+        JScrollPane tableScrollPane = new JScrollPane(userTable); 
         tableScrollPane.setBorder(new LineBorder(new Color(70, 130, 180), 2));
         tableScrollPane.setOpaque(true);
         tableScrollPane.getViewport().setOpaque(true);
@@ -196,6 +205,14 @@ public class UserManage extends javax.swing.JPanel {
 
         // Load data after all components are initialized
         loadStaffData();
+        
+        //******************* Disable Editing table *********
+        
+//         boolean a = userTable.isEditing();
+//        if(a==false)
+//        {
+//            JOptionPane.showMessageDialog(null, "không thể chỉnh sửa tại đây!");
+//        }
     }
 
     private void loadStaffData() {
@@ -206,6 +223,7 @@ public class UserManage extends javax.swing.JPanel {
             if (userTable != null) {
                 userTable.setModel(tableModel);
             }
+            
         }
 
         try (Connection conn = DBConnection.getConnection();
@@ -233,6 +251,8 @@ public class UserManage extends javax.swing.JPanel {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi khi tải dữ liệu nhân viên: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
+        
+        
     }
 
     private void filterTable(String query) {
@@ -329,7 +349,7 @@ public class UserManage extends javax.swing.JPanel {
         dialog.add(cancelButton);
         dialog.setVisible(true);
     }
-
+    
     private void showEditDialog() {
         int selectedRow = userTable.getSelectedRow();
         if (selectedRow == -1) {
@@ -457,21 +477,22 @@ public class UserManage extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("User Management");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setPreferredSize(new Dimension(900, 700));
-            frame.add(new UserManage());
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
+    try {
+        UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    SwingUtilities.invokeLater(() -> {
+        JFrame frame = new JFrame("User Management");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(900, 700));
+        frame.add(new UserManage());
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

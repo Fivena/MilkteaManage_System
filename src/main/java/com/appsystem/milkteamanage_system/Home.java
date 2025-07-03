@@ -17,10 +17,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-/**
- *
- * @author Admin
- */
+
 public class Home extends javax.swing.JFrame {
 
     private JPanel mainContentPanel;
@@ -283,7 +280,7 @@ public class Home extends javax.swing.JFrame {
 
     private void showProductsManage() {
         mainContentPanel.removeAll();
-        ProductManage productManagePanel = new ProductManage();
+        productmanager productManagePanel = new productmanager();
         mainContentPanel.add(productManagePanel, BorderLayout.CENTER);
         mainContentPanel.revalidate();
         mainContentPanel.repaint();
@@ -313,19 +310,17 @@ public class Home extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 641, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 348, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+   
    
      public static void main(String[] args) {
         try {
@@ -342,6 +337,10 @@ public class Home extends javax.swing.JFrame {
             }
             home.setVisible(true);
         });
+
+       productmanager pr = new productmanager();
+       pr.setVisible(true);
+
     }
 }
 
