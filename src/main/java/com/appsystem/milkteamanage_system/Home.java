@@ -4,6 +4,7 @@
  */
 package com.appsystem.milkteamanage_system;
 
+import com.appsystem.milkteamanage_system.ProductManager.productmanager;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
