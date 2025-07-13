@@ -4,6 +4,8 @@
  */
 package com.appsystem.milkteamanage_system;
 
+import com.appsystem.milkteamanage_system.DiscountManage.DiscountManage;
+import com.appsystem.milkteamanage_system.OrderManage.OrderManage;
 import com.appsystem.milkteamanage_system.ProductManager.productmanager;
 import java.awt.*;
 import java.awt.event.WindowEvent;
@@ -27,6 +29,7 @@ public class Home extends javax.swing.JFrame {
     private JButton usersButton;
     private JButton productsButton;
     private JButton ordersButton;
+    private JButton discountButton;
     private JButton statsButton;
     private JButton testButton;
     private JButton optionsButton;
@@ -34,7 +37,7 @@ public class Home extends javax.swing.JFrame {
 
     
    public Home() throws IOException {
-         setTitle("Bubble Tea Management System");
+        setTitle("Hệ thống quản lí bán trà sữa");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
@@ -127,7 +130,15 @@ public class Home extends javax.swing.JFrame {
         mainMenu.add(createSeparator());
         statsButton = createNavButton("Thống Kê", "chart-icon.png", e -> setActiveButton(statsButton));
         mainMenu.add(statsButton);
-
+        
+        mainMenu.add(createSeparator());
+        discountButton = createNavButton("Quản Lí Khuyến Mãi", "receipt-icon.png", e -> {
+            showDiscountManage();
+            setActiveButton(discountButton);
+        });
+        mainMenu.add(discountButton);
+        
+       
         JPanel additionalMenu = new JPanel();
         additionalMenu.setLayout(new BoxLayout(additionalMenu, BoxLayout.Y_AXIS));
         additionalMenu.setOpaque(false);
@@ -289,12 +300,20 @@ public class Home extends javax.swing.JFrame {
 
     private void showOrdersManage() {
         mainContentPanel.removeAll();
-        JLabel placeholder = new JLabel("Orders Management (Placeholder)", SwingConstants.CENTER);
-        placeholder.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        mainContentPanel.add(placeholder, BorderLayout.CENTER);
+        OrderManage orderManagePanel = new OrderManage();
+        mainContentPanel.add(orderManagePanel, BorderLayout.CENTER);
         mainContentPanel.revalidate();
         mainContentPanel.repaint();
     }
+    
+    private void showDiscountManage() {
+        mainContentPanel.removeAll();
+        DiscountManage discountManagePanel = new DiscountManage();
+        mainContentPanel.add(discountManagePanel, BorderLayout.CENTER);
+        mainContentPanel.revalidate();
+        mainContentPanel.repaint();
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

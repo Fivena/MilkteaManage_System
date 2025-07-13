@@ -6,6 +6,7 @@ package com.appsystem.milkteamanage_system;
 
 import com.appsystem.milkteamanage_system.Utils.DBConnection;
 import com.appsystem.milkteamanage_system.Home;
+import com.appsystem.milkteamanage_system.Staff.StaffHomePage;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
@@ -106,21 +107,33 @@ public class Login extends javax.swing.JFrame {
             return;
         }
 
-        String sqlQuery = "SELECT * FROM Staffs WHERE Username = ? AND Password = ?";
+        String sqlStaffQuery = "SELECT * FROM Staffs WHERE Username = ? AND Password = ?";
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pst = conn.prepareStatement(sqlQuery)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement pst = conn.prepareStatement(sqlStaffQuery)) {
             pst.setString(1, username);
             pst.setString(2, password);
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
+                String role = rs.getString("Role");
                 JOptionPane.showMessageDialog(null, "Đăng nhập thành công!");
-                Home home = new Home();
-                home.setVisible(true);
+
+                if ("admin".equalsIgnoreCase(role)) {
+                    Home home = new Home();
+                    home.setVisible(true);
+                } else if ("staff".equalsIgnoreCase(role)) {
+                    // lấy ID và tên Staff truyền vào trang bán hàng
+                    int staffId = rs.getInt("StaffID");
+                    String staffName = rs.getString("FullName"); 
+                    String defaultOrderType="Uống tại quán";
+                    StaffHomePage staffpage = new StaffHomePage(staffId, staffName,defaultOrderType);
+                    staffpage.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Không xác định vai trò người dùng.");
+                    return;
+                }
+
                 this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Tên đăng nhập hoặc mật khẩu không đúng!");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Lỗi kết nối cơ sở dữ liệu: " + e.getMessage());
@@ -129,10 +142,10 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
-
 
     /**
      * @param args the command line arguments

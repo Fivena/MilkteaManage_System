@@ -17,11 +17,11 @@ import com.appsystem.milkteamanage_system.ProductManager.AddProductPanel;
 import java.awt.Dialog;
 import javax.swing.SwingUtilities;
 
-
 public class productmanager extends javax.swing.JPanel {
 
     public productmanager() {
         initComponents();
+        loadDataFromDatabase();
 
     }
 
@@ -32,9 +32,10 @@ public class productmanager extends javax.swing.JPanel {
         btnXoa = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnedit = new javax.swing.JButton();
+        btnload = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableproduct = new javax.swing.JTable();
-        btnload = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(900, 700));
 
@@ -63,6 +64,13 @@ public class productmanager extends javax.swing.JPanel {
         btnedit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btneditActionPerformed(evt);
+            }
+        });
+
+        btnload.setText("Load Data");
+        btnload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnloadActionPerformed(evt);
             }
         });
 
@@ -95,18 +103,13 @@ public class productmanager extends javax.swing.JPanel {
         tableproduct.setPreferredSize(new java.awt.Dimension(900, 140));
         jScrollPane1.setViewportView(tableproduct);
 
-        btnload.setText("Load Data");
-        btnload.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnloadActionPerformed(evt);
-            }
-        });
+        jScrollPane2.setViewportView(jScrollPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(162, Short.MAX_VALUE)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(122, 122, 122)
@@ -116,38 +119,39 @@ public class productmanager extends javax.swing.JPanel {
                 .addGap(116, 116, 116)
                 .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(206, 206, 206))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addGap(258, 258, 258)
                 .addComponent(btnload)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
-     JDialog dialog = new JDialog(SwingUtilities.getWindowAncestor(this), "Thêm sản phẩm", Dialog.ModalityType.APPLICATION_MODAL);
-    AddProductPanel addPanel = new AddProductPanel();
+        JDialog dialog = new JDialog(SwingUtilities.getWindowAncestor(this), "Thêm sản phẩm", Dialog.ModalityType.APPLICATION_MODAL);
+        AddProductPanel addPanel = new AddProductPanel();
 
-    // Khi đóng panel, reload lại table
-    dialog.setContentPane(addPanel);
-    dialog.pack();
-    dialog.setLocationRelativeTo(this);
-    dialog.setVisible(true);
+        // Khi đóng panel, reload lại table
+        dialog.setContentPane(addPanel);
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
 
-    // Sau khi thêm xong, load lại dữ liệu
-    loadDataFromDatabase();
+        // Sau khi thêm xong, load lại dữ liệu
+        loadDataFromDatabase();
 
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -247,6 +251,7 @@ public class productmanager extends javax.swing.JPanel {
     private javax.swing.JButton btnedit;
     private javax.swing.JButton btnload;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tableproduct;
     // End of variables declaration//GEN-END:variables
 }
