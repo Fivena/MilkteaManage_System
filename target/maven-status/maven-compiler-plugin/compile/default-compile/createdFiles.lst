@@ -1,14 +1,28 @@
+<<<<<<< Updated upstream
 com\appsystem\milkteamanage_system\OrderManage\OrderManage$1.class
 com\appsystem\milkteamanage_system\Staff\StaffHomePage$4.class
+=======
+com\appsystem\milkteamanage_system\ProductManage.form
+com\appsystem\milkteamanage_system\ProductManage.class
+com\appsystem\milkteamanage_system\Dashboard$1.class
+com\appsystem\milkteamanage_system\Home$4.class
+com\appsystem\milkteamanage_system\ProductManage$1.class
+>>>>>>> Stashed changes
 com\appsystem\milkteamanage_system\UserManage$2.class
 com\appsystem\milkteamanage_system\ProductManager\productmanager.class
 com\appsystem\milkteamanage_system\ProductManager\productmanager$2.class
 com\appsystem\milkteamanage_system\Staff\StaffHomePage$10.class
 com\appsystem\milkteamanage_system\Utils\TableBackGroundRender.class
+<<<<<<< Updated upstream
 ChooseImage.class
+=======
+com\appsystem\milkteamanage_system\Utils\DBConnection.class
+com\appsystem\milkteamanage_system\Dashboard.form
+>>>>>>> Stashed changes
 com\appsystem\milkteamanage_system\Dashboard$3.class
 com\appsystem\milkteamanage_system\Staff\StaffHomePage$1.class
 com\appsystem\milkteamanage_system\Home$2.class
+<<<<<<< Updated upstream
 com\appsystem\milkteamanage_system\ProductManager\productmanager$5.class
 com\appsystem\milkteamanage_system\Staff\OrderFrame$5.class
 com\appsystem\milkteamanage_system\OrderManage\OrderManage.class
@@ -19,6 +33,17 @@ com\appsystem\milkteamanage_system\ProductManager\AddProductPanel.class
 com\appsystem\milkteamanage_system\Staff\StaffHomePage$11.class
 com\appsystem\milkteamanage_system\Staff\StaffHomePage$7.class
 com\appsystem\milkteamanage_system\ShowImageFromPath.class
+=======
+com\appsystem\milkteamanage_system\Home.class
+com\appsystem\milkteamanage_system\Login.form
+com\appsystem\milkteamanage_system\UserManage$3.class
+com\appsystem\milkteamanage_system\Dashboard$2.class
+com\appsystem\milkteamanage_system\UserManage.form
+com\appsystem\milkteamanage_system\Home.form
+com\appsystem\milkteamanage_system\Dashboard.class
+com\appsystem\milkteamanage_system\Login.class
+com\appsystem\milkteamanage_system\Home$3.class
+>>>>>>> Stashed changes
 com\appsystem\milkteamanage_system\Home$1.class
 com\appsystem\milkteamanage_system\UserManage.class
 com\appsystem\milkteamanage_system\Login$3.class
