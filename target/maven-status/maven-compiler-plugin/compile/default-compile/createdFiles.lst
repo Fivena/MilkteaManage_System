@@ -1,7 +1,10 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 com\appsystem\milkteamanage_system\OrderManage\OrderManage$1.class
 com\appsystem\milkteamanage_system\Staff\StaffHomePage$4.class
 =======
+=======
+>>>>>>> Stashed changes
 com\appsystem\milkteamanage_system\ProductManage.form
 com\appsystem\milkteamanage_system\ProductManage.class
 com\appsystem\milkteamanage_system\Dashboard$1.class
@@ -18,6 +21,9 @@ ChooseImage.class
 =======
 com\appsystem\milkteamanage_system\Utils\DBConnection.class
 com\appsystem\milkteamanage_system\Dashboard.form
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 com\appsystem\milkteamanage_system\Dashboard$3.class
 com\appsystem\milkteamanage_system\Staff\StaffHomePage$1.class
